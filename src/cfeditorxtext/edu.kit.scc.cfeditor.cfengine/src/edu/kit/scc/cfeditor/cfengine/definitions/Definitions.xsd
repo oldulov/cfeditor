@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.kit.edu/scc/Cfeditor"
+	xmlns:tns="http://www.kit.edu/scc/Cfeditor" elementFormDefault="qualified">
+
+    <element name="part" type="tns:partType"></element>
+
+	<complexType name="partType">
+		<sequence>
+			<element ref="tns:body" minOccurs="1" maxOccurs="1"></element>
+			<element ref="tns:bundle" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+    <element name="body" type="tns:bodyType">
+    	<unique name="bodyComponentName">
+			<selector xpath="tns:component" />
+			<field xpath="@name" />
+		</unique>
+	</element>
+
+	<element name="bundle" type="tns:bundleType">
+		<unique name="bundleComponentName">
+			<selector xpath="tns:component" />
+			<field xpath="@name" />
+		</unique>
+	</element>
+
+	<element name="component" type="tns:componentType"></element>
+
+	<element name="promisetype" type="tns:promisetypeType"></element>
+
+	<complexType name="bodyType">
+		<sequence>
+			<element ref="tns:component" maxOccurs="unbounded"></element>
+			<element ref="tns:promisetype" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="bundleType">
+		<sequence>
+			<element ref="tns:component" maxOccurs="unbounded"></element>
+			<element ref="tns:promisetype" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="componentType">
+		<attribute name="name" type="string" use="required"></attribute>
+		<attribute name="promisetypes" type="tns:typeList" use="required"></attribute>
+	</complexType>
+
+	<complexType name="promisetypeType">
+		<attribute name="name" type="string" use="required"></attribute>
+		<attribute name="type" type="tns:dataType" use="required"></attribute>
+		<attribute name="range" type="string" use="optional"></attribute>
+	</complexType>
+
+	<simpleType name="dataType">
+		<restriction base="string">
+			<enumeration value="INT"></enumeration>
+			<enumeration value="STRING"></enumeration>
+			<enumeration value="SLIST"></enumeration>
+			<enumeration value="OPTION"></enumeration>
+			<enumeration value="IRANGE"></enumeration>
+			<enumeration value="REAL"></enumeration>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="typeList">
+		<list itemType="string"></list>
+	</simpleType>
+</schema>

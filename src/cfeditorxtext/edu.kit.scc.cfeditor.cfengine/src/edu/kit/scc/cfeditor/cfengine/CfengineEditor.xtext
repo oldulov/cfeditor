@@ -1,0 +1,88 @@
+grammar edu.kit.scc.cfeditor.cfengine.CfengineEditor hidden(WS, SL_COMMENT)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate cfengine "http://www.kit.edu/scc/cfeditor/cfengine/CfengineEditor"
+
+CfModel:
+	(elements+=AbstractElement)*;
+
+terminal ID:
+	('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*; //'!'
+//terminal INT returns ecore::EInt: //omittable?
+//	('0'..'9')+;
+
+	//terminal STRING:
+//	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\' ) | !('\\' | '"'))* '"' |
+//	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\' ) | !('\\' | "'"))* "'";
+terminal STRING:
+	'"' (!('\\' | '"') | '\\' .)* '"' |
+	"'" (!('\\' | "'") | '\\' .)* "'";
+
+terminal SL_COMMENT:
+	'#' !('\n' | '\r')* ('\r'? '\n')?;
+
+terminal WS:
+	(' ' | '\t' | '\r' | '\n')+;
+
+terminal ANY_OTHER:
+	.;
+
+CLASS_ID:
+	ID ('.' CLASS_ID)? | '!' CLASS_ID | '(' CLASS_ID ')' ('.' CLASS_ID)?;
+
+//(ID | '(' | ')' | '|' | '!' | '.')+;
+//PLACEHOLDER:
+//	(ANY_OTHER | ID | STRING | '=>' | ';' | ',' | '(' | ')' | '{' | '}' | '@');
+//PLACEHOLDERB:
+//	(ANY_OTHER | ID | STRING | '=>' | ';' | ',' | '(' | ')');
+
+AbstractElement:
+	(Bundle | Body);
+
+Bundle:
+	'bundle' component=BundleComponent name=ID ('(' variables+=ID (',' variables+=ID)* ')')? '{' (promiseType+=BundlePromiseType)* '}';
+
+BundlePromiseType:
+	name=ID ':' (promises+=BundlePromise)* (classes+=BundleClass)*;
+
+BundleClass:
+	name=CLASS_ID '::' (promises+=BundlePromise)+; //TODO + or * ?
+BundlePromise:
+	name=STRING (values+=PromiseValue (',' values+=PromiseValue)*)? ';';//name=STRING (values+=PromiseValue (',' values+=PromiseValue)*)* ';';
+
+PromiseValue:
+	keyword=ID '=>' ((values+=STRING | functions+=SimpleFunction|values+=ID) | ('{' (values+=STRING | functions+=SimpleFunction)
+	(',' (values+=STRING | functions+=SimpleFunction))* '}') | ('{' '@' '(' ID ')' '}')); //TODO "| ID"?
+	//	| '{''@' '(' ID ')' '}'); TODO?
+
+//(promiseType+=BundlePromiseType ':' ((PLACEHOLDERB) |
+//	'{' '@' (PLACEHOLDERB)* '}')*)*
+//	'}';
+Body:
+	'body' component=BodyComponent name=ID ('(' variables+=ID (',' variables+=ID)* ')')? '{' (promiseType+=BodyFunction)*
+	(classes+=BodyClass)*
+	'}'; //BodyPromiseType '=>' (values+=STRING | '{' values+=STRING
+//	(',' values+=STRING)* '}') ';'
+BodyClass:
+	name=CLASS_ID '::' (promiseType+=BodyFunction)*;
+
+BodyFunction:
+	name=BodyPromiseType '=>' (values+=STRING | List?='{' values+=STRING //TODO List? unnecessary
+	(',' values+=STRING)* '}' | function+=SpecialFunction | '{' '@' '(' ID ')' '}') ';';
+	//	(',' values+=STRING)* '}' | function+=SpecialFunction | '{' '@' (PLACEHOLDERB)* '}') ';';
+SimpleFunction:
+	id=ID '(' values+=STRING (',' values+=STRING)* ')';
+
+SpecialFunction:
+	id=ID '(' (ANY_OTHER | ID | STRING |  ',' | '$(' ID ')' | '${' ID '}' | func+=SpecialFunction)*
+	/*(INT | STRING | ID | functions+=SpecialFunction) (',' (INT | STRING | ID | functions+=SpecialFunction))* */
+	')';
+
+BodyPromiseType:
+	name=ID;
+
+BundleComponent:
+	name=ID;
+
+BodyComponent:
+	name=ID;

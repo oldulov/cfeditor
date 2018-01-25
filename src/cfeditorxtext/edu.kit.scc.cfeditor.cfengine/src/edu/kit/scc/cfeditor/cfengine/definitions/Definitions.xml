@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<part xmlns="http://www.kit.edu/scc/Cfeditor" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kit.edu/scc/Cfeditor Definitions.xsd">
+  <body>
+    <component name="acl" promisetypes="aces acl_directory_inherit acl_method acl_type specify_inherit_aces" />
+    <component name="action" promisetypes="action_policy ifelapsed expireafter log_string log_level log_kept log_priority log_repaired log_failed audit background report_level measurement_class" />
+    <component name="association" promisetypes="forward_relationship backward_relationship associates" />
+    <component name="changes" promisetypes="hash report_changes update_hashes report_diffs" />
+    <component name="classes" promisetypes="promise_repaired repair_failed repair_denied repair_timeout promise_kept cancel_kept cancel_repaired cancel_notkept persist_time timer_policy" />
+    <component name="contain" promisetypes="useshell umask exec_owner exec_group exec_timeout chdir chroot preview no_output" />
+    <component name="copy_from" promisetypes="source servers collapse_destination_dir compare copy_backup encrypt check_root copylink_patterns copy_size findertype linkcopy_patterns force_update force_ipv4 portnumber preserve purge stealth timeout trustkey type_check verify" />
+    <component name="database_server" promisetypes="db_server_owner db_server_password db_server_host db_server_type db_server_connection_db" />
+    <component name="delete" promisetypes="dirlinks rmdirs" />
+    <component name="delete_select" promisetypes="delete_if_startwith_from_list delete_if_not_startwith_from_list delete_if_match_from_list delete_if_not_match_from_list delete_if_contains_from_list delete_if_not_contains_from_list" />
+    <component name="depth_search" promisetypes="depth exclude_dirs include_basedir include_dirs rmdeadlinks traverse_links xdev" />
+    <component name="edit_defaults" promisetypes="edit_backup empty_file_before_editing max_file_size recognize_join" />
+    <component name="edit_field" promisetypes="allow_blank_fields extend_fields field_operation field_separator field_value select_field value_separator" />
+    <component name="environment_interface" promisetypes="env_addresses env_name env_network" />
+    <component name="environment_resources" promisetypes="env_cpus env_memory env_disk env_baseline env_spec_file" />
+    <component name="file_select" promisetypes="leaf_name path_name search_mode search_size search_owners search_groups search_bsdflags ctime mtime atime exec_regex exec_program file_types issymlinkto file_result" />
+    <component name="infer" promisetypes="pre_assoc_pattern post_assoc_pattern inference" />
+    <component name="insert_select" promisetypes="insert_if_startwith_from_list insert_if_not_startwith_from_list insert_if_match_from_list insert_if_not_match_from_list insert_if_contains_from_list insert_if_not_contains_from_list" />
+    <component name="link_from" promisetypes="source link_type copy_patterns link_children when_linking_children when_no_source" />
+    <component name="location" promisetypes="before_after first_last" />
+    <component name="match_value" promisetypes="select_line_matching select_line_matching select_line_number extraction_regex track_growing_file" />
+    <component name="mount" promisetypes="edit_fstab mount_type mount_source mount_server mount_options unmount" />
+	<component name="package_method" promisetypes="package_add_command package_arch_regex package_changes package_delete_command package_delete_convention package_file_repositories package_installed_regex package_list_arch_regex package_list_command package_list_name_regex package_list_update_command package_list_update_ifelapsed package_list_version_regex package_name_convention package_name_regex package_noverify_regex package_noverify_returncode package_patch_arch_regex package_patch_command package_patch_installed_regex package_patch_list_command package_patch_name_regex package_patch_version_regex package_update_command package_verify_command package_version_regex package_multiline_start" />
+    <component name="perms" promisetypes="bsdflags groups mode owners rxdirs" />
+    <component name="printfile" promisetypes="file_to_print number_of_lines" />
+    <component name="process_count" promisetypes="in_range_define match_range out_of_range_define" />
+    <component name="process_select" promisetypes="command pid pgid ppid priority process_owner process_result rsize status stime_range ttime_range tty threads vsize" />
+    <component name="rename" promisetypes="disable disable_mode disable_suffix newname rotate" />
+    <component name="replace_with" promisetypes="occurrences replace_value" />
+    <component name="select_region" promisetypes="include_start_delimiter include_end_delimiter select_start select_end" />
+    <component name="service_method" promisetypes="service_type service_args service_autostart_policy service_dependence_chain" />
+    <component name="tcp_ip" promisetypes="ipv4_address ipv4_netmask ipv6_address" />
+    <component name="transaction" promisetypes="value_kept value_repaired value_notkept" />
+    <component name="volume" promisetypes="check_foreign freespace sensible_size sensible_count scan_arrivals" />
+    <promisetype name="aces" type="SLIST" range="((user|group):[^:]+:[-=+,rwx()dtTabBpcoD]*(:(allow|deny))?)|((all|mask):[-=+,rwx()]*(:(allow|deny))?)" />
+    <promisetype name="acl_directory_inherit" type="OPTION" range="nochange,parent,specify,clear" />
+    <promisetype name="acl_method" type="OPTION" range="append,overwrite" />
+    <promisetype name="acl_type" type="OPTION" range="generic,posix,ntfs" />
+    <promisetype name="action_policy" type="OPTION" range="fix,warn,nop" />
+    <promisetype name="allow_blank_fields" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="associates" type="SLIST" range="" />
+    <promisetype name="atime" type="IRANGE" range="0,2147483647" />
+    <promisetype name="audit" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="background" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="backward_relationship" type="STRING" range="" />
+    <promisetype name="before_after" type="OPTION" range="before,after" />
+    <promisetype name="bsdflags" type="SLIST" range="[+-]*" />
+    <promisetype name="cancel_kept" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="cancel_notkept" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="cancel_repaired" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="chdir" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="check_foreign" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="check_root" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="chroot" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="collapse_destination_dir" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="command" type="STRING" range="" />
+    <promisetype name="compare" type="OPTION" range="atime,mtime,ctime,digest,hash,exists,binary" />
+    <promisetype name="copylink_patterns" type="SLIST" range="" />
+    <promisetype name="copy_backup" type="OPTION" range="true,false,timestamp" />
+    <promisetype name="copy_patterns" type="SLIST" range="" />
+    <promisetype name="copy_size" type="IRANGE" range="0,inf" />
+    <promisetype name="ctime" type="IRANGE" range="0,2147483647" />
+    <promisetype name="db_server_connection_db" type="STRING" range="" />
+    <promisetype name="db_server_host" type="STRING" range="" />
+    <promisetype name="db_server_owner" type="STRING" range="" />
+    <promisetype name="db_server_password" type="STRING" range="" />
+    <promisetype name="db_server_type" type="OPTION" range="postgres,mysql" />
+    <promisetype name="delete_if_contains_from_list" type="SLIST" range="" />
+    <promisetype name="delete_if_match_from_list" type="SLIST" range="" />
+    <promisetype name="delete_if_not_contains_from_list" type="SLIST" range="" />
+    <promisetype name="delete_if_not_match_from_list" type="SLIST" range="" />
+    <promisetype name="delete_if_not_startwith_from_list" type="SLIST" range="" />
+    <promisetype name="delete_if_startwith_from_list" type="SLIST" range="" />
+    <promisetype name="depth" type="INT" range="0,99999999999" />
+    <promisetype name="dirlinks" type="OPTION" range="delete,tidy,keep" />
+    <promisetype name="disable" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="disable_mode" type="STRING" range="[0-7augorwxst,+-]+" />
+    <promisetype name="disable_suffix" type="STRING" range="" />
+    <promisetype name="edit_backup" type="OPTION" range="true,false,timestamp,rotate" />
+    <promisetype name="edit_fstab" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="empty_file_before_editing" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="encrypt" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="env_addresses" type="SLIST" range="" />
+    <promisetype name="env_baseline" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="env_cpus" type="INT" range="0,99999999999" />
+    <promisetype name="env_disk" type="INT" range="0,99999999999" />
+    <promisetype name="env_memory" type="INT" range="0,99999999999" />
+    <promisetype name="env_name" type="STRING" range="" />
+    <promisetype name="env_network" type="STRING" range="" />
+    <promisetype name="env_spec_file" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="exclude_dirs" type="SLIST" range=".*" />
+    <promisetype name="exec_group" type="STRING" range="" />
+    <promisetype name="exec_owner" type="STRING" range="" />
+    <promisetype name="exec_program" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="exec_regex" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="exec_timeout" type="INT" range="0,99999999999" />
+    <promisetype name="expireafter" type="INT" range="0,99999999999" />
+    <promisetype name="extend_fields" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="extraction_regex" type="STRING" range="" />
+    <promisetype name="field_operation" type="OPTION" range="prepend,append,alphanum,delete,set" />
+    <promisetype name="field_separator" type="STRING" range=".*" />
+    <promisetype name="field_value" type="STRING" range=".*" />
+    <promisetype name="file_result" type="STRING" range="[(leaf_name|path_name|file_types|mode|size|owner|group|atime|ctime|mtime|issymlinkto|exec_regex|exec_program|bsdflags)[|&amp;!.]*]*" />
+    <promisetype name="file_to_print" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="file_types" type="OPTION" range="plain,reg,symlink,dir,socket,fifo,door,char,block" />
+    <promisetype name="findertype" type="OPTION" range="MacOSX" />
+    <promisetype name="first_last" type="OPTION" range="first,last" />
+    <promisetype name="force_ipv4" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="force_update" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="forward_relationship" type="STRING" range="" />
+    <promisetype name="freespace" type="STRING" range="[0-9]+[MBkKgGmb%]" />
+    <promisetype name="groups" type="SLIST" range="[a-zA-Z0-9_$.-]+" />
+    <promisetype name="hash" type="OPTION" range="md5,sha1,sha256,sha384,,sha512,best" />
+    <promisetype name="ifelapsed" type="INT" range="0,99999999999" />
+    <promisetype name="include_basedir" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="include_dirs" type="SLIST" range=".*" />
+    <promisetype name="include_end_delimiter" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="include_start_delimiter" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="inference" type="STRING" range="" />
+    <promisetype name="insert_if_contains_from_list" type="SLIST" range=".*" />
+    <promisetype name="insert_if_match_from_list" type="SLIST" range=".*" />
+    <promisetype name="insert_if_not_contains_from_list" type="SLIST" range=".*" />
+    <promisetype name="insert_if_not_match_from_list" type="SLIST" range=".*" />
+    <promisetype name="insert_if_not_startwith_from_list" type="SLIST" range=".*" />
+    <promisetype name="insert_if_startwith_from_list" type="SLIST" range=".*" />
+    <promisetype name="in_range_define" type="SLIST" range="" />
+    <promisetype name="ipv4_address" type="STRING" range="[0-9.]+/[0-4]+" />
+    <promisetype name="ipv4_netmask" type="STRING" range="[0-9.]+/[0-4]+" />
+    <promisetype name="ipv6_address" type="STRING" range="[0-9a-fA-F:]+/[0-9]+" />
+    <promisetype name="issymlinkto" type="SLIST" range="" />
+    <promisetype name="leaf_name" type="SLIST" range="" />
+    <promisetype name="linkcopy_patterns" type="SLIST" range="" />
+    <promisetype name="link_children" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="link_type" type="OPTION" range="symlink,hardlink,relative,absolute,none" />
+    <promisetype name="log_failed" type="STRING" range="stdout|udp_syslog|(&quot;?[a-zA-Z]:\\.*)|(/.*)" />
+    <promisetype name="log_kept" type="STRING" range="stdout|udp_syslog|(&quot;?[a-zA-Z]:\\.*)|(/.*)" />
+    <promisetype name="log_level" type="OPTION" range="inform,verbose,error,log" />
+    <promisetype name="log_priority" type="OPTION" range="emergency,alert,critical,error,warning,notice,info,debug" />
+    <promisetype name="log_repaired" type="STRING" range="stdout|udp_syslog|(&quot;?[a-zA-Z]:\\.*)|(/.*)" />
+    <promisetype name="log_string" type="STRING" range="" />
+    <promisetype name="match_range" type="IRANGE" range="0,99999999999" />
+    <promisetype name="max_file_size" type="INT" range="0,99999999999" />
+    <promisetype name="measurement_class" type="STRING" range="" />
+    <promisetype name="mode" type="STRING" range="[0-7augorwxst,+-]+" />
+    <promisetype name="mount_options" type="SLIST" range="" />
+    <promisetype name="mount_server" type="STRING" range="" />
+    <promisetype name="mount_source" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="mount_type" type="OPTION" range="nfs,nfs2,nfs3,nfs4" />
+    <promisetype name="mtime" type="IRANGE" range="0,2147483647" />
+    <promisetype name="newname" type="STRING" range="" />
+    <promisetype name="no_output" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="number_of_lines" type="INT" range="0,99999999999" />
+    <promisetype name="occurrences" type="OPTION" range="all,first" />
+    <promisetype name="out_of_range_define" type="SLIST" range="" />
+    <promisetype name="owners" type="SLIST" range="[a-zA-Z0-9_$.-]+" />
+    <promisetype name="package_add_command" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="package_arch_regex" type="STRING" range="" />
+    <promisetype name="package_changes" type="OPTION" range="individual,bulk,bulk_no_names" />
+    <promisetype name="package_delete_command" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="package_delete_convention" type="STRING" range="" />
+    <promisetype name="package_file_repositories" type="SLIST" range="" />
+    <promisetype name="package_installed_regex" type="STRING" range="" />
+    <promisetype name="package_list_arch_regex" type="STRING" range="" />
+    <promisetype name="package_list_command" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="package_list_name_regex" type="STRING" range="" />
+    <promisetype name="package_list_update_command" type="STRING" range="" />
+    <promisetype name="package_list_update_ifelapsed" type="INT" range="-99999999999,9999999999" />
+    <promisetype name="package_list_version_regex" type="STRING" range="" />
+    <promisetype name="package_multiline_start" type="STRING" range="" />
+    <promisetype name="package_name_convention" type="STRING" range="" />
+    <promisetype name="package_name_regex" type="STRING" range="" />
+    <promisetype name="package_noverify_regex" type="STRING" range="" />
+    <promisetype name="package_noverify_returncode" type="INT" range="-99999999999,9999999999" />
+    <promisetype name="package_patch_arch_regex" type="STRING" range="" />
+    <promisetype name="package_patch_command" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="package_patch_installed_regex" type="STRING" range="" />
+    <promisetype name="package_patch_list_command" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="package_patch_name_regex" type="STRING" range="" />
+    <promisetype name="package_patch_version_regex" type="STRING" range="" />
+    <promisetype name="package_update_command" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="package_verify_command" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="package_version_regex" type="STRING" range="" />
+    <promisetype name="path_name" type="SLIST" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="persist_time" type="INT" range="0,99999999999" />
+    <promisetype name="pgid" type="IRANGE" range="0,99999999999" />
+    <promisetype name="pid" type="IRANGE" range="0,99999999999" />
+    <promisetype name="portnumber" type="INT" range="1024,99999" />
+    <promisetype name="post_assoc_pattern" type="STRING" range="" />
+    <promisetype name="ppid" type="IRANGE" range="0,99999999999" />
+    <promisetype name="preserve" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="preview" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="pre_assoc_pattern" type="STRING" range="" />
+    <promisetype name="priority" type="IRANGE" range="-20,20" />
+    <promisetype name="process_owner" type="SLIST" range="" />
+    <promisetype name="process_result" type="STRING" range="[(process_owner|pid|ppid||pgid|rsize|vsize|status|command|ttime|stime|tty|priority|threads)[|&amp;!.]*]*" />
+    <promisetype name="promise_kept" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="promise_repaired" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="purge" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="recognize_join" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="repair_denied" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="repair_failed" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="repair_timeout" type="SLIST" range="[a-zA-Z0-9_$()\[\].]+" />
+    <promisetype name="replace_value" type="STRING" range=".*" />
+    <promisetype name="report_changes" type="OPTION" range="all,stats,content,none" />
+    <promisetype name="report_diffs" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="report_level" type="OPTION" range="inform,verbose,error,log" />
+    <promisetype name="rmdeadlinks" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="rmdirs" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="rotate" type="INT" range="0,99" />
+    <promisetype name="rsize" type="IRANGE" range="0,99999999999" />
+    <promisetype name="rxdirs" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="scan_arrivals" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="search_bsdflags" type="SLIST" range="[+-]*" />
+    <promisetype name="search_groups" type="SLIST" range="" />
+    <promisetype name="search_mode" type="SLIST" range="[0-7augorwxst,+-]+" />
+    <promisetype name="search_owners" type="SLIST" range="" />
+    <promisetype name="search_size" type="IRANGE" range="0,inf" />
+    <promisetype name="select_end" type="STRING" range="" />
+    <promisetype name="select_field" type="INT" range="1,99999999" />
+    <promisetype name="select_line_matching " type="STRING" range="" />
+    <promisetype name="select_line_matching" type="STRING" range="" />
+    <promisetype name="select_line_number" type="INT" range="0,99999999999" />
+    <promisetype name="select_start" type="STRING" range="" />
+    <promisetype name="sensible_count" type="INT" range="0,99999999999" />
+    <promisetype name="sensible_size" type="INT" range="0,99999999999" />
+    <promisetype name="servers" type="SLIST" range="[A-Za-z0-9_.:-]+" />
+    <promisetype name="service_args" type="STRING" range="" />
+    <promisetype name="service_autostart_policy" type="OPTION" range="none,boot_time,on_demand" />
+    <promisetype name="service_dependence_chain" type="OPTION" range="ignore,start_parent_services,stop_child_services,all_related" />
+    <promisetype name="service_type" type="OPTION" range="windows,init,inetd,xinetd" />
+    <promisetype name="source" type="STRING" range="&quot;?(([a-zA-Z]:\\.*)|(/.*))" />
+    <promisetype name="specify_inherit_aces" type="SLIST" range="((user|group):[^:]+:[-=+,rwx()dtTabBpcoD]*(:(allow|deny))?)|((all|mask):[-=+,rwx()]*(:(allow|deny))?)" />
+    <promisetype name="status" type="STRING" range="" />
+    <promisetype name="stealth" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="stime_range" type="IRANGE" range="0,2147483647" />
+    <promisetype name="threads" type="IRANGE" range="0,99999999999" />
+    <promisetype name="timeout" type="INT" range="1,3600" />
+    <promisetype name="timer_policy" type="OPTION" range="absolute,reset" />
+    <promisetype name="track_growing_file" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="traverse_links" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="trustkey" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="ttime_range" type="IRANGE" range="0,2147483647" />
+    <promisetype name="tty" type="STRING" range="" />
+    <promisetype name="type_check" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="umask" type="OPTION" range="0,77,22,27,72,077,022,027,072" />
+    <promisetype name="unmount" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="update_hashes" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="useshell" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="value_kept" type="REAL" range="" />
+    <promisetype name="value_notkept" type="REAL" range="" />
+    <promisetype name="value_repaired" type="REAL" range="" />
+    <promisetype name="value_separator" type="STRING" range="^.$" />
+    <promisetype name="verify" type="OPTION" range="true,false,yes,no,on,off" />
+    <promisetype name="vsize" type="IRANGE" range="0,99999999999" />
+    <promisetype name="when_linking_children" type="OPTION" range="override_file,if_no_such_file" />
+    <promisetype name="when_no_source" type="OPTION" range="force,delete,nop" />
+    <promisetype name="xdev" type="OPTION" range="true,false,yes,no,on,off" />
+  </body>
+  <bundle>
+    <component name="agent" promisetypes="vars classes reports commands databases environments files interfaces methods outputs packages processes services storage" />
+    <component name="common" promisetypes="vars classes reports" />
+    <component name="edit_line" promisetypes="vars classes reports delete_lines insert_lines replace_patterns field_edits" />
+    <component name="executor" promisetypes="vars classes reports" />
+    <component name="knowledge" promisetypes="vars classes reports topics occurrences inferences" />
+    <component name="monitor" promisetypes="vars classes reports measurements" />
+	<component name="reporter" promisetypes="vars classes reports" />
+    <component name="runagent" promisetypes="vars classes reports" />
+    <component name="server" promisetypes="vars classes reports access roles" />
+    <promisetype name="access" type="INT" />
+    <promisetype name="classes" type="INT" />
+    <promisetype name="commands" type="INT" />
+    <promisetype name="databases" type="INT" />
+    <promisetype name="delete_lines" type="INT" />
+    <promisetype name="environments" type="INT" />
+    <promisetype name="files" type="INT" />
+    <promisetype name="inferences" type="INT" />
+    <promisetype name="insert_lines" type="INT" />
+    <promisetype name="interfaces" type="INT" />
+    <promisetype name="measurements" type="INT" />
+    <promisetype name="methods" type="INT" />
+    <promisetype name="occurrences" type="INT" />
+    <promisetype name="outputs" type="INT" />
+    <promisetype name="packages" type="INT" />
+    <promisetype name="processes" type="INT" />
+    <promisetype name="reports" type="INT" />
+    <promisetype name="roles" type="INT" />
+    <promisetype name="services" type="INT" />
+    <promisetype name="storage" type="INT" />
+    <promisetype name="topics" type="INT" />
+    <promisetype name="vars" type="INT" />
+  </bundle>
+</part>

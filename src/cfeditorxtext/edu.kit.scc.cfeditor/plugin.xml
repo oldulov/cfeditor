@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="edu.kit.scc.cfeditor.ui.wizard.category.cfeditor"
+            class="edu.kit.scc.cfeditor.ui.wizard.NewCfProjectWizard"
+            icon="icons/Cfeditor.png"
+            id="edu.kit.scc.cfeditor.ui.wizard.NewCfProjectWizard"
+            name="Cfeditor Project"
+            project="true">
+      </wizard>
+      <category
+            id="edu.kit.scc.cfeditor.ui.wizard.category.cfeditor"
+            name="Cfeditor">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.intro.configExtension">
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/overview.xml">
+      </configExtension>
+   </extension>
+    <extension  
+  point="org.eclipse.ui.navigator.navigatorContent">
+ <commonWizard
+       type="new"
+       wizardId="edu.kit.scc.cfeditor.ui.wizard.NewCfProjectWizard">
+    <enablement>
+       <or>
+          <adapt
+                type="org.eclipse.core.resources.IFolder">
+          </adapt>
+          <adapt
+                type="org.eclipse.core.resources.IProject">
+          </adapt>
+          <adapt
+                type="org.eclipse.core.resources.IWorkspaceRoot">
+          </adapt>
+          <adapt
+                type="org.eclipse.core.resources.IFile">
+          </adapt>
+       </or>
+    </enablement>
+ </commonWizard>
+</extension>
+    <extension
+          point="org.eclipse.ui.views">
+       <category
+             id="edu.kit.scc.cfeditor.ui.views.category.cfeditor"
+             name="Cfeditor">
+       </category>
+    </extension>
+
+</plugin>

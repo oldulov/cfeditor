@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Cfeditor Core
+Bundle-SymbolicName: edu.kit.scc.cfeditor;singleton:=true
+Bundle-Version: 0.2
+Bundle-Activator: edu.kit.scc.cfeditor.ui.internal.CfeditorActivator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.ide,
+ edu.kit.scc.cfeditor.cfengine.ui,
+ org.eclipse.ui.intro,
+ org.eclipse.core.resources
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: KIT/SCC

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/edu.kit.scc.cfeditor.feature_0.2.0.jar" id="edu.kit.scc.cfeditor.feature" version="0.2">
+      <category name="edu.kit.scc.cfeditor.updatesite.category"/>
+   </feature>
+   <category-def name="edu.kit.scc.cfeditor.updatesite.category" label="Cfeditor"/>
+</site>

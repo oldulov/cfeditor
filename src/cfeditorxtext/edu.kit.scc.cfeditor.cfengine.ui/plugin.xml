@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+              class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              extensions="cf"
+              icon="icons/cffile.gif"
+              id="edu.kit.scc.cfeditor.cfengine.editor"
+              name="Cfengine Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="edu.kit.scc.cfeditor.cfengine.editor.validate">
+         <activeWhen>
+            <reference
+                    definitionId="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="edu.kit.scc.cfeditor.cfengine.editor" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="edu.kit.scc.cfeditor.cfengine.ui.page.cfengineeditor"
+            name="Cfengine Editor">
+            <keywordReference
+                  id="edu.kit.scc.cfeditor.cfengine.ui.keyword_cfengine">
+            </keywordReference>
+        </page>
+        <page
+            category="edu.kit.scc.cfeditor.cfengine.ui.page.cfengineeditor"
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="edu.kit.scc.cfeditor.cfengine.ui.page.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="edu.kit.scc.cfeditor.cfengine.ui.keyword_cfengine"/>
+        </page>
+        <page
+            category="edu.kit.scc.cfeditor.cfengine.ui.page.cfengineeditor"
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="edu.kit.scc.cfeditor.cfengine.ui.page.templates"
+            name="Templates">
+            <keywordReference id="edu.kit.scc.cfeditor.cfengine.ui.keyword_cfengine"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="edu.kit.scc.cfeditor.cfengine.ui.keyword_cfengine"
+            label="Cfengine"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="edu.kit.scc.cfeditor.cfengine.editor.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="edu.kit.scc.cfeditor.cfengine.editor.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="cf">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="cf">
+        </resourceServiceProvider>
+    </extension>
+
+
+
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="edu.kit.scc.cfeditor.cfengine.editor.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+   <!-- quickfix marker resolution generator -->
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+      </markerResolutionGenerator>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="edu.kit.scc.cfeditor.ui.wizard.category.cfeditor"
+            class="edu.kit.scc.cfeditor.cfengine.ui.CfengineEditorExecutableExtensionFactory:edu.kit.scc.cfeditor.cfengine.ui.wizard.NewProjectWizard"
+            finalPerspective="edu.kit.scc.cfeditor.cfengine.ui.perspectives.cfengine"
+            icon="icons/Cfeditor.png"
+            id="edu.kit.scc.cfeditor.cfengine.ui.wizard.CfengineEditorNewProjectWizard"
+            name="Cfengine Project"
+            project="true">
+      </wizard>
+      <wizard
+            category="edu.kit.scc.cfeditor.ui.wizard.category.cfeditor"
+            class="edu.kit.scc.cfeditor.cfengine.ui.wizard.NewCfFileWizard"
+            icon="icons/cffile.gif"
+            id="edu.kit.scc.cfeditor.cfengine.ui.wizard.NewCfFileWizard"
+            name="Cf File"
+            project="false">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="edu.kit.scc.cfeditor.cfengine.ui.perspectives.CfengineEditorPerspective"
+            icon="icons/Cfeditor.png"
+            id="edu.kit.scc.cfeditor.cfengine.ui.perspectives.cfengine"
+            name="Cfengine">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="edu.kit.scc.cfeditor.cfengine.ui.perspectives.cfengine">
+         <view
+               id="org.eclipse.ui.navigator.ProjectExplorer"
+               minimized="false"
+               ratio="0.2"
+               relationship="left"
+               relative="org.eclipse.ui.editorss">
+         </view>
+         <view
+               id="org.eclipse.ui.views.ContentOutline"
+               minimized="false"
+               ratio="0.75"
+               relationship="right"
+               relative="org.eclipse.ui.editorss">
+         </view>
+         <view
+               id="org.eclipse.ui.views.ProblemView"
+               minimized="false"
+               ratio="0.75"
+               relationship="bottom"
+               relative="org.eclipse.ui.editorss">
+         </view>
+         <view
+               id="edu.kit.scc.cfeditor.cfengine.ui.views.ClassView"
+               minimized="false"
+               relationship="bottom"
+               relative="org.eclipse.ui.views.ContentOutline">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension  
+  point="org.eclipse.ui.navigator.navigatorContent">
+ <commonWizard
+            type="new"
+            wizardId="edu.kit.scc.cfeditor.cfengine.ui.wizard.NewCfFileWizard">
+  <enablement>
+   <or>
+    <adapt type="org.eclipse.core.resources.IFolder" />
+           <adapt type="org.eclipse.core.resources.IProject" /> 
+             <adapt type="org.eclipse.core.resources.IWorkspaceRoot" />
+             <adapt
+                   type="org.eclipse.core.resources.IFile">
+             </adapt> 
+   </or>
+  </enablement>
+ </commonWizard>
+ <commonWizard
+       type="new"
+       wizardId="edu.kit.scc.cfeditor.cfengine.ui.wizard.CfengineEditorNewProjectWizard">
+    <enablement>
+       <or>
+          <adapt
+                type="org.eclipse.core.resources.IFolder">
+          </adapt>
+          <adapt
+                type="org.eclipse.core.resources.IProject">
+          </adapt>
+          <adapt
+                type="org.eclipse.core.resources.IWorkspaceRoot">
+          </adapt>
+          <adapt
+                type="org.eclipse.core.resources.IFile">
+          </adapt>
+       </or>
+    </enablement>
+ </commonWizard>
+</extension>
+
+<extension
+      point="org.eclipse.ui.views">
+   <view
+         category="edu.kit.scc.cfeditor.ui.views.category.cfeditor"
+         class="edu.kit.scc.cfeditor.cfengine.ui.views.ClassViewPart"
+         icon="icons/outline_co.gif"
+         id="edu.kit.scc.cfeditor.cfengine.ui.views.ClassView"
+         name="Class View"
+         restorable="true">
+   </view>
+</extension>
+   
+
+</plugin>

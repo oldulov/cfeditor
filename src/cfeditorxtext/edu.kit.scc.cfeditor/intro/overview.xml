@@ -1,0 +1,12 @@
+<introContent>
+	<extensionContent id="edu.kit.scc.cfeditor.ui.overview" style="css/overview.css" name="Cfeditor Overview"
+		path="overview/@">
+		<group style-id="content-group" id="edu.kit.scc.cfeditor.ui-overview-group">
+			<link label="Cfeditor"
+				url="http://code.google.com/a/eclipselabs.org/p/cfeditor/" id="cfeditor-overview"
+				style-id="content-link">
+				<text>Learn more about Cfeditor</text>
+			</link>
+		</group>
+	</extensionContent>
+</introContent>

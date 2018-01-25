@@ -1,0 +1,22 @@
+#--------------------------------------------
+# README file for the cfeditor project on xtext
+# author: Andreas Bender
+# E-mail:andreas.bender@kit.edu
+#--------------------------------------------
+
+Import project into eclipse:
+
+Download: Eclipse Helios for RCP and RAP Developers (http://www.eclipse.org/downloads/packages/eclipse-rcp-and-rap-developers/heliosr)
+Install Xtext from: http://www.eclipse.org/modeling/tmf/downloads/?project=xtext
+
+OR
+
+Download full Helios Xtext Distribution (recommended) from: http://xtext.itemis.com/xtext/language=en/23947/downloads
+
+In eclipse: 
+-	File->Import
+-	Select “Existing Projects into Workspace”
+-	Next “Select root directory:” Browse…->Select folder: “cfeditorxtext”
+-	Finish
+
+Run project: Right click on org.eclipse.xtext.cfeditor (project folder) -> Run As -> Eclipse Application
